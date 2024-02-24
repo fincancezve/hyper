@@ -19,6 +19,7 @@ NotRequired = NotRequired
 
 AssetInfo = TypedDict("AssetInfo", {"name": str, "szDecimals": int})
 Meta = TypedDict("Meta", {"universe": List[AssetInfo]})
+
 Side = Union[Literal["A"], Literal["B"]]
 SIDES: List[Side] = ["A", "B"]
 
@@ -52,6 +53,27 @@ Fill = TypedDict(
         "crossed": bool,
     },
 )
+
+AssetCtx = TypedDict(
+    "AssetCtx",
+    {
+        "dayNtlVlm": str,
+        "funding": str,
+        "impactPxs":
+            [
+                str,
+                str
+                ],
+        "markPx": str,
+        "midPx": str,
+        "openInterest": str,
+        "oraclePx": str,
+        "premium": str,
+        "prevDayPx": str
+    }
+)
+MetaAndAssetCtxs = Union[Meta,List[AssetCtx]]
+
 # TODO: handle other types of user events
 UserEventsData = TypedDict("UserEventsData", {"fills": List[Fill]}, total=False)
 UserEventsMsg = TypedDict("UserEventsMsg", {"channel": Literal["user"], "data": UserEventsData})
